@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 
@@ -21,8 +21,8 @@ public class HangMan
         // give the user input guesses 10 times to the user
         for (int i = 0; i < 10; i++)
         {
-            string state = "not_repeat"; 
-            
+            string state = "not_repeat";
+
             Console.WriteLine("Enter your guess: " + secretDash);
             string userGuess = Console.ReadLine();
             // condition1: if user inserts empty array, don't count guess
@@ -71,10 +71,30 @@ public class HangMan
                         {
                             Console.WriteLine("");
                             Console.WriteLine("You won, the secret word is :" + secretDash);
+                            Console.WriteLine("Do you want to play again? type yes/no ");
+                            string userResponse = Console.ReadLine();
+                            if (userResponse.ToLower() == "yes")
+                            {
+                                // Random rnd = new Random();
+                                index = rnd.Next(0, secretWords.Length);
+                                secretWord = secretWords[index];
+                                i = 0;
+                                secretDash = new string('-', secretWord.Length);
+                                DashChar = secretDash.ToCharArray();
+                                guesses = new List<string>();
+
+                                continue;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You quit the game! ");
+                                return;
+                            }
+
+
                             return;
                         }
                     }
-
                 }
             }
             // condition4 : if user inserts a word, use this logic
@@ -97,4 +117,3 @@ public class HangMan
 
     }
 }
-
